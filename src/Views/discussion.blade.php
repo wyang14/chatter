@@ -2,13 +2,13 @@
 
 @section(Config::get('chatter.yields.head'))
     @if(Config::get('chatter.sidebar_in_discussion_view'))
-        <link href="{{ url('/vendor/devdojo/chatter/assets/vendor/spectrum/spectrum.css') }}" rel="stylesheet">
+        <link href="{{ url('/vendor/wyang14/chatter/assets/vendor/spectrum/spectrum.css') }}" rel="stylesheet">
     @endif
-    <link href="{{ url('/vendor/devdojo/chatter/assets/css/chatter.css') }}" rel="stylesheet">
+    <link href="{{ url('/vendor/wyang14/chatter/assets/css/chatter.css') }}" rel="stylesheet">
     @if($chatter_editor == 'simplemde')
-        <link href="{{ url('/vendor/devdojo/chatter/assets/css/simplemde.min.css') }}" rel="stylesheet">
+        <link href="{{ url('/vendor/wyang14/chatter/assets/css/simplemde.min.css') }}" rel="stylesheet">
     @elseif($chatter_editor == 'trumbowyg')
-        <link href="{{ url('/vendor/devdojo/chatter/assets/vendor/trumbowyg/ui/trumbowyg.css') }}" rel="stylesheet">
+        <link href="{{ url('/vendor/wyang14/chatter/assets/vendor/trumbowyg/ui/trumbowyg.css') }}" rel="stylesheet">
         <style>
             .trumbowyg-box, .trumbowyg-editor {
                 margin: 0px auto;
@@ -66,7 +66,7 @@
                         <button class="btn btn-primary" id="new_discussion_btn"><i class="chatter-new"></i> New {{ Config::get('chatter.titles.discussion') }}</button>
                         <a href="/{{ Config::get('chatter.routes.home') }}"><i class="chatter-bubble"></i> All {{ Config::get('chatter.titles.discussions') }}</a>
                         <ul class="nav nav-pills nav-stacked">
-                            <?php $categories = DevDojo\Chatter\Models\Models::category()->all(); ?>
+                            <?php $categories = Wyang14\Chatter\Models\Models::category()->all(); ?>
                             @foreach($categories as $category)
                                 <li><a href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $category->slug }}"><div class="chatter-box" style="background-color:{{ $category->color }}"></div> {{ $category->name }}</a></li>
                             @endforeach
@@ -110,19 +110,19 @@
 					        				@endif
 
 					        			@else
-					        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($post->user->email) ?>">
+					        				<span class="chatter_avatar_circle" style="background-color:#<?= \Wyang14\Chatter\Helpers\ChatterHelper::stringToColorCode($post->user->email) ?>">
 					        					{{ ucfirst(substr($post->user->email, 0, 1)) }}
 					        				</span>
 					        			@endif
 					        		</div>
 
 					        		<div class="chatter_middle">
-					        			<span class="chatter_middle_details"><a href="{{ \DevDojo\Chatter\Helpers\ChatterHelper::userLink($post->user) }}">{{ ucfirst($post->user->{Config::get('chatter.user.database_field_with_user_name')}) }}</a> <span class="ago chatter_middle_details">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</span></span>
+					        			<span class="chatter_middle_details"><a href="{{ \Wyang14\Chatter\Helpers\ChatterHelper::userLink($post->user) }}">{{ ucfirst($post->user->{Config::get('chatter.user.database_field_with_user_name')}) }}</a> <span class="ago chatter_middle_details">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</span></span>
 					        			<div class="chatter_body">
 
 					        				@if($post->markdown)
 					        					<pre class="chatter_body_md">{{ $post->body }}</pre>
-					        					<?= \DevDojo\Chatter\Helpers\ChatterHelper::demoteHtmlHeaderTags( GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $post->body ) ); ?>
+					        					<?= \Wyang14\Chatter\Helpers\ChatterHelper::demoteHtmlHeaderTags( GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $post->body ) ); ?>
 					        					<!--?= GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $post->body ); ?-->
 					        				@else
 					        					<?= $post->body; ?>
@@ -159,7 +159,7 @@
 		        				@endif
 
 		        			@else
-		        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->email) ?>">
+		        				<span class="chatter_avatar_circle" style="background-color:#<?= \Wyang14\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->email) ?>">
 		        					{{ strtoupper(substr(Auth::user()->email, 0, 1)) }}
 		        				</span>
 		        			@endif

@@ -6,7 +6,7 @@
  * Time: 11:58.
  */
 
-namespace DevDojo\Chatter\Models;
+namespace Wyang14\Chatter\Models;
 
 class Models
 {
@@ -58,7 +58,7 @@ class Models
      *
      * @param array $attributes
      *
-     * @return \DevDojo\Chatter\Models\Category
+     * @return \Wyang14\Chatter\Models\Category
      */
     public static function category(array $attributes = [])
     {
@@ -70,7 +70,7 @@ class Models
      *
      * @param array $attributes
      *
-     * @return \DevDojo\Chatter\Models\Discussion
+     * @return \Wyang14\Chatter\Models\Discussion
      */
     public static function discussion(array $attributes = [])
     {
@@ -82,7 +82,7 @@ class Models
      *
      * @param array $attributes
      *
-     * @return \DevDojo\Chatter\Models\Post
+     * @return \Wyang14\Chatter\Models\Post
      */
     public static function post(array $attributes = [])
     {

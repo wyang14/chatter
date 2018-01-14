@@ -1,6 +1,6 @@
 <?php
 
-namespace DevDojo\Chatter;
+namespace Wyang14\Chatter;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +14,7 @@ class ChatterServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../public/assets' => public_path('vendor/devdojo/chatter/assets'),
+            __DIR__.'/../public/assets' => public_path('vendor/wyang14/chatter/assets'),
         ], 'chatter_assets');
 
         $this->publishes([

@@ -56,7 +56,7 @@ return [
 
     'headline'      => 'Welcome to Chatter',
     'description'   => 'A simple forum package for your Laravel app.',
-    'headline_logo' => '/vendor/devdojo/chatter/assets/images/logo-light.png',
+    'headline_logo' => '/vendor/wyang14/chatter/assets/images/logo-light.png',
 
     /*
     |--------------------------------------------------------------------------

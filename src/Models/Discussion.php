@@ -1,6 +1,6 @@
 <?php
 
-namespace DevDojo\Chatter\Models;
+namespace Wyang14\Chatter\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
