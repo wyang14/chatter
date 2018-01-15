@@ -88,35 +88,16 @@ class ChatterDiscussionController extends Controller
             }
         }
 
-        // *** Let's gaurantee that we always have a generic slug *** //
-        $slug = str_slug($request->title, '-');
-
-        $discussion_exists = Models::discussion()->where('slug', '=', $slug)->first();
-        $incrementer = 1;
-        $new_slug = $slug;
-        while (isset($discussion_exists->id)) {
-            $new_slug = $slug.'-'.$incrementer;
-            $discussion_exists = Models::discussion()->where('slug', '=', $new_slug)->first();
-            $incrementer += 1;
-        }
-
-        if ($slug != $new_slug) {
-            $slug = $new_slug;
-        }
-
         $new_discussion = [
             'title'               => $request->title,
             'chatter_category_id' => $request->chatter_category_id,
             'user_id'             => $user_id,
-            'slug'                => $slug,
+            'slug'                => '',
             'color'               => $request->color,
             ];
 
-        $category = Models::category()->find($request->chatter_category_id);
-        if (!isset($category->slug)) {
-            $category = Models::category()->first();
-        }
-
+        $category = Models::category()->find($request->chatter_category_id)->first();
+        
         $discussion = Models::discussion()->create($new_discussion);
 
         $new_post = [
@@ -142,17 +123,17 @@ class ChatterDiscussionController extends Controller
 
             $chatter_alert = [
                 'chatter_alert_type' => 'success',
-                'chatter_alert'      => '成功创建新的讨论('.config('chatter.titles.discussion').').',
+                'chatter_alert'      => '成功创建新的'.config('chatter.titles.discussion').'.',
                 ];
 
-            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->id.'/'.$post->id)->with($chatter_alert);
+            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->id.'/'.$discussion->id)->with($chatter_alert);
         } else {
             $chatter_alert = [
                 'chatter_alert_type' => 'danger',
-                'chatter_alert'      => '糟糕 :( 在创建您的讨论('.config('chatter.titles.discussion').')出问题咯.',
+                'chatter_alert'      => '糟糕 :( 在创建您的'.config('chatter.titles.discussion').'时出问题咯.',
                 ];
 
-            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->id.'/'.$post->id)->with($chatter_alert);
+            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->id.'/'.$discussion->id)->with($chatter_alert);
         }
     }
 

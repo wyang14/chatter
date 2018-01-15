@@ -84,11 +84,8 @@ class ChatterPostController extends Controller
 
         $discussion = Models::discussion()->find($request->chatter_discussion_id);
 
-        $category = Models::category()->find($discussion->chatter_category_id);
-        if (!isset($category->slug)) {
-            $category = Models::category()->first();
-        }
-
+        $category = Models::category()->find($discussion->chatter_category_id)->first();
+        
         if ($new_post->id) {
             Event::fire(new ChatterAfterNewResponse($request, $new_post));
             if (function_exists('chatter_after_new_response')) {
@@ -103,17 +100,17 @@ class ChatterPostController extends Controller
 
             $chatter_alert = [
                 'chatter_alert_type' => 'success',
-                'chatter_alert'      => '提交成功'.config('chatter.titles.discussion').'.',
+                'chatter_alert'      => '成功提交'.config('chatter.titles.discussion').'.',
                 ];
 
-            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->slug.'/'.$discussion->slug)->with($chatter_alert);
+            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->id.'/'.$discussion->id)->with($chatter_alert);
         } else {
             $chatter_alert = [
                 'chatter_alert_type' => 'danger',
                 'chatter_alert'      => '抱歉, 似乎提交出现问题.',
                 ];
 
-            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->slug.'/'.$discussion->slug)->with($chatter_alert);
+            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->id.'/'.$discussion->id)->with($chatter_alert);
         }
     }
 
@@ -166,17 +163,14 @@ class ChatterPostController extends Controller
 
             $discussion = Models::discussion()->find($post->chatter_discussion_id);
 
-            $category = Models::category()->find($discussion->chatter_category_id);
-            if (!isset($category->slug)) {
-                $category = Models::category()->first();
-            }
-
+            $category = Models::category()->find($discussion->chatter_category_id)->first();
+            
             $chatter_alert = [
                 'chatter_alert_type' => 'success',
-                'chatter_alert'      => 'Successfully updated the '.config('chatter.titles.discussion').'.',
+                'chatter_alert'      => '成功更新'.config('chatter.titles.discussion').'.',
                 ];
 
-            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->slug.'/'.$discussion->slug)->with($chatter_alert);
+            return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->id.'/'.$discussion->id)->with($chatter_alert);
         } else {
             $chatter_alert = [
                 'chatter_alert_type' => 'danger',
@@ -212,17 +206,17 @@ class ChatterPostController extends Controller
 
             return redirect('/'.config('chatter.routes.home'))->with([
                 'chatter_alert_type' => 'success',
-                'chatter_alert'      => '成功删除('.strtolower(config('chatter.titles.discussion')).').',
+                'chatter_alert'      => '成功删除'.strtolower(config('chatter.titles.discussion')).'.',
             ]);
         }
 
         $post->delete();
 
-        $url = '/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$post->discussion->category->slug.'/'.$post->discussion->slug;
+        $url = '/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$post->discussion->category->id.'/'.$post->discussion->id;
 
         return redirect($url)->with([
             'chatter_alert_type' => 'success',
-            'chatter_alert'      => '成功从('.config('chatter.titles.discussion').')删除帖子.',
+            'chatter_alert'      => '成功从'.config('chatter.titles.discussion').'中删除帖子.',
         ]);
     }
 }
