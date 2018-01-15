@@ -92,7 +92,7 @@ class ChatterDiscussionController extends Controller
             'title'               => $request->title,
             'chatter_category_id' => $request->chatter_category_id,
             'user_id'             => $user_id,
-            'slug'                => '',
+            'slug'                => uniqid($user_id),
             'color'               => $request->color,
             ];
 
