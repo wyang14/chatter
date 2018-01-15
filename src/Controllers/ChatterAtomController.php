@@ -40,13 +40,13 @@ class ChatterAtomController extends Controller
 
         foreach ($discussions as $discussion) {
             $child = $xml->addChild('entry');
-            $child->addChild('id', route('chatter.discussion.show', ['discussion' => $discussion->slug]));
+            $child->addChild('id', route('chatter.discussion.show', ['discussion' => $discussion->id]));
             $child->addChild('title', $discussion->title);
 
             $link = $child->addChild('link');
             $link->addAttribute('type', 'text/html');
             $link->addAttribute('rel', 'alternate');
-            $link->addAttribute('href', route('chatter.discussion.show', ['discussion' => $discussion->slug]));
+            $link->addAttribute('href', route('chatter.discussion.show', ['discussion' => $discussion->id]));
 
             $child->addChild('updated', Carbon::parse($discussion->created_at)->toAtomString());
 

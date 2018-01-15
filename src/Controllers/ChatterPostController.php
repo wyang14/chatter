@@ -67,7 +67,7 @@ class ChatterPostController extends Controller
                 $minute_copy = (config('chatter.security.time_between_posts') == 1) ? ' minute' : ' minutes';
                 $chatter_alert = [
                     'chatter_alert_type' => 'danger',
-                    'chatter_alert'      => 'In order to prevent spam, please allow at least '.config('chatter.security.time_between_posts').$minute_copy.' in between submitting content.',
+                    'chatter_alert'      => '为防止灌水, 发帖请间隔'.config('chatter.security.time_between_posts').$minute_copy.'.',
                     ];
 
                 return back()->with($chatter_alert)->withInput();
@@ -103,14 +103,14 @@ class ChatterPostController extends Controller
 
             $chatter_alert = [
                 'chatter_alert_type' => 'success',
-                'chatter_alert'      => 'Response successfully submitted to '.config('chatter.titles.discussion').'.',
+                'chatter_alert'      => '提交成功'.config('chatter.titles.discussion').'.',
                 ];
 
             return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->slug.'/'.$discussion->slug)->with($chatter_alert);
         } else {
             $chatter_alert = [
                 'chatter_alert_type' => 'danger',
-                'chatter_alert'      => 'Sorry, there seems to have been a problem submitting your response.',
+                'chatter_alert'      => '抱歉, 似乎提交出现问题.',
                 ];
 
             return redirect('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$category->slug.'/'.$discussion->slug)->with($chatter_alert);
@@ -180,7 +180,7 @@ class ChatterPostController extends Controller
         } else {
             $chatter_alert = [
                 'chatter_alert_type' => 'danger',
-                'chatter_alert'      => 'Nah ah ah... Could not update your response. Make sure you\'re not doing anything shady.',
+                'chatter_alert'      => '啊喔... 修改失败.',
                 ];
 
             return redirect('/'.config('chatter.routes.home'))->with($chatter_alert);
@@ -202,7 +202,7 @@ class ChatterPostController extends Controller
         if ($request->user()->id !== (int) $post->user_id) {
             return redirect('/'.config('chatter.routes.home'))->with([
                 'chatter_alert_type' => 'danger',
-                'chatter_alert'      => 'Nah ah ah... Could not delete the response. Make sure you\'re not doing anything shady.',
+                'chatter_alert'      => '啊喔... 删除失败.',
             ]);
         }
 
@@ -212,7 +212,7 @@ class ChatterPostController extends Controller
 
             return redirect('/'.config('chatter.routes.home'))->with([
                 'chatter_alert_type' => 'success',
-                'chatter_alert'      => 'Successfully deleted the response and '.strtolower(config('chatter.titles.discussion')).'.',
+                'chatter_alert'      => '成功删除('.strtolower(config('chatter.titles.discussion')).').',
             ]);
         }
 
@@ -222,7 +222,7 @@ class ChatterPostController extends Controller
 
         return redirect($url)->with([
             'chatter_alert_type' => 'success',
-            'chatter_alert'      => 'Successfully deleted the response from the '.config('chatter.titles.discussion').'.',
+            'chatter_alert'      => '成功从('.config('chatter.titles.discussion').')删除帖子.',
         ]);
     }
 }
