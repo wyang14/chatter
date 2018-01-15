@@ -1,6 +1,4 @@
 
-# Laravel Forum Package - Chatter
-
 ### Installation
 
 Quick Note: If this is a new project, make sure to install the default user authentication provided with Laravel. `php artisan make:auth`
