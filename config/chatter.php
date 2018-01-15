@@ -135,6 +135,10 @@ return [
     |       Tip: leave this blank if you have absolute url's for images
     |       stored in the database.
     |
+    |   *avatar_image_database_foreign_table*: This is the database table that
+    |       contains the logged in user avatar image. This field will
+    |       be a foreign table to the 'users' database table. 
+    |
     |   *avatar_image_database_field*: This is the database field that
     |       contains the logged in user avatar image. This field will
     |       be inside of the 'users' database table. Tip: leave this
@@ -148,7 +152,8 @@ return [
         'database_field_with_user_name' => 'name',
         'relative_url_to_profile'       => '',
         'relative_url_to_image_assets'  => '',
-        'avatar_image_database_field'   => '',
+        'avatar_image_database_profile_table' => true,
+        'avatar_image_database_field'   => 'avatar',
     ],
 
     /*

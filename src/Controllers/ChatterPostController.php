@@ -64,7 +64,7 @@ class ChatterPostController extends Controller
 
         if (config('chatter.security.limit_time_between_posts')) {
             if ($this->notEnoughTimeBetweenPosts()) {
-                $minute_copy = (config('chatter.security.time_between_posts') == 1) ? ' minute' : ' minutes';
+                $minute_copy = '分钟';
                 $chatter_alert = [
                     'chatter_alert_type' => 'danger',
                     'chatter_alert'      => '为防止灌水, 发帖请间隔'.config('chatter.security.time_between_posts').$minute_copy.'.',

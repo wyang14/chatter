@@ -76,13 +76,24 @@
 					        		<div class="chatter_avatar">
 					        			@if(Config::get('chatter.user.avatar_image_database_field'))
 
-					        				<?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
+                          <?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
 
+                          <?php
+                            $avatar_image = null;
+                            if (Config::get('chatter.user.avatar_image_database_profile_table')) {
+                              $avatar_image = $discussion->user->profile->{$db_field};
+                            } else {
+                              $avatar_image = $discussion->user->{$db_field};
+                            }
+                          ?>
+
+                          <?php $avatar_image = $avatar_image == null ? '/images/default-avatar.png' : $avatar_image ?>
+                          
 					        				<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
-					        				@if( (substr($discussion->user->{$db_field}, 0, 7) == 'http://') || (substr($discussion->user->{$db_field}, 0, 8) == 'https://') )
+					        				@if( (substr($avatar_image, 0, 7) == 'http://') || (substr($avatar_image, 0, 8) == 'https://') )
 					        					<img src="{{ $discussion->user->{$db_field}  }}">
 					        				@else
-					        					<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . $discussion->user->{$db_field}  }}">
+					        					<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . $avatar_image  }}">
 					        				@endif
 
 					        			@else
