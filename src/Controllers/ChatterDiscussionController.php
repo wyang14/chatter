@@ -178,19 +178,19 @@ class ChatterDiscussionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($category, $slug = null)
+    public function show($category_id, $discussion_id = null)
     {
-        if (!isset($category) || !isset($slug)) {
+        if (!isset($category_id) || !isset($discussion_id)) {
             return redirect(config('chatter.routes.home'));
         }
 
-        $discussion = Models::discussion()->where('slug', '=', $slug)->first();
+        $discussion = Models::discussion()->where('id', '=', $discussion_id)->first();
         if (is_null($discussion)) {
             abort(404);
         }
 
         $discussion_category = Models::category()->find($discussion->chatter_category_id);
-        if ($category != $discussion_category->slug) {
+        if ($category_id != $discussion_category->id) {
             return redirect(config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$discussion_category->slug.'/'.$discussion->slug);
         }
         $posts = Models::post()->with('user')->where('chatter_discussion_id', '=', $discussion->id)->orderBy('created_at', 'ASC')->paginate(10);

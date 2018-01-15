@@ -9,13 +9,13 @@ use Illuminate\Routing\Controller as Controller;
 
 class ChatterController extends Controller
 {
-    public function index($slug = '')
+    public function index($category_id = null)
     {
         $pagination_results = config('chatter.paginate.num_of_results');
 
         $discussions = Models::discussion()->with('user')->with('post')->with('postsCount')->with('category')->orderBy('created_at', 'DESC')->paginate($pagination_results);
-        if (isset($slug)) {
-            $category = Models::category()->where('slug', '=', $slug)->first();
+        if (isset($category_id)) {
+            $category = Models::category()->where('id', '=', $category_id)->first();
             if (isset($category->id)) {
                 $discussions = Models::discussion()->with('user')->with('post')->with('postsCount')->with('category')->where('chatter_category_id', '=', $category->id)->orderBy('created_at', 'DESC')->paginate($pagination_results);
             }

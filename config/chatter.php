@@ -13,12 +13,12 @@ return [
     */
 
     'routes' => [
-        'home'       => 'forums',
-        'discussion' => 'discussion',
-        'category'   => 'category',
-        'post'       => 'posts',
-        'register'   => 'register',
-        'login'      => 'login',
+        'home'       => '论坛',
+        'discussion' => '讨论',
+        'category'   => '分类',
+        'post'       => '帖子',
+        'register'   => '注册',
+        'login'      => '登录',
     ],
 
     /*
@@ -32,9 +32,9 @@ return [
     */
 
     'titles' => [
-        'discussion'  => 'Discussion',
-        'discussions' => 'Discussions',
-        'category'    => 'Category',
+        'discussion'  => '讨论',
+        'discussions' => '讨论',
+        'category'    => '分类',
     ],
 
    /*
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'headline'      => 'Welcome to Chatter',
+    'headline'      => '欢迎来到讨论区',
     'description'   => 'A simple forum package for your Laravel app.',
     'headline_logo' => '/vendor/wyang14/chatter/assets/images/logo-light.png',
 
@@ -163,10 +163,10 @@ return [
     */
 
     'alert_messages' => [
-        'success' => 'Well done!',
-        'info'    => 'Heads Up!',
-        'warning' => 'Wuh Oh!',
-        'danger'  => 'Oh Snap!',
+        'success' => '搞定!',
+        'info'    => '友情提示!',
+        'warning' => '啊哦!',
+        'danger'  => '糟糕!',
     ],
 
     /*

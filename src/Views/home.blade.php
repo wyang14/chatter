@@ -44,7 +44,7 @@
 	@if (count($errors) > 0)
 	    <div class="chatter-alert alert alert-danger">
 	    	<div class="container">
-	    		<p><strong><i class="chatter-alert-danger"></i> {{ Config::get('chatter.alert_messages.danger') }}</strong> Please fix the following errors:</p>
+	    		<p><strong><i class="chatter-alert-danger"></i> {{ Config::get('chatter.alert_messages.danger') }}</strong> 请解决以下错误:</p>
 		        <ul>
 		            @foreach ($errors->all() as $error)
 		                <li>{{ $error }}</li>
@@ -61,8 +61,8 @@
 	    	<div class="col-md-3 left-column">
 	    		<!-- SIDEBAR -->
 	    		<div class="chatter_sidebar">
-					<button class="btn btn-primary" id="new_discussion_btn"><i class="chatter-new"></i> New {{ Config::get('chatter.titles.discussion') }}</button>
-					<a href="/{{ Config::get('chatter.routes.home') }}"><i class="chatter-bubble"></i> All {{ Config::get('chatter.titles.discussions') }}</a>
+					<button class="btn btn-primary" id="new_discussion_btn"><i class="chatter-new"></i> 新建{{ Config::get('chatter.titles.discussion') }}</button>
+					<a href="/{{ Config::get('chatter.routes.home') }}"><i class="chatter-bubble"></i> 所有{{ Config::get('chatter.titles.discussions') }}</a>
           {!! $categoriesMenu !!}
 				</div>
 				<!-- END SIDEBAR -->
@@ -72,7 +72,7 @@
 		        	<ul class="discussions">
 		        		@foreach($discussions as $discussion)
 				        	<li>
-				        		<a class="discussion_list" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}/{{ $discussion->category->slug }}/{{ $discussion->slug }}">
+				        		<a class="discussion_list" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}/{{ $discussion->category->id }}/{{ $discussion->id }}">
 					        		<div class="chatter_avatar">
 					        			@if(Config::get('chatter.user.avatar_image_database_field'))
 
@@ -96,7 +96,7 @@
 
 					        		<div class="chatter_middle">
 					        			<h3 class="chatter_middle_title">{{ $discussion->title }} <div class="chatter_cat" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</div></h3>
-					        			<span class="chatter_middle_details">Posted By: <span data-href="/user">{{ ucfirst($discussion->user->{Config::get('chatter.user.database_field_with_user_name')}) }}</span> {{ \Carbon\Carbon::createFromTimeStamp(strtotime($discussion->created_at))->diffForHumans() }}</span>
+					        			<span class="chatter_middle_details"><span data-href="/user">{{ ucfirst($discussion->user->{Config::get('chatter.user.database_field_with_user_name')}) }}</span> 发送于 {{ \Carbon\Carbon::createFromTimeStamp(strtotime($discussion->created_at))->diffForHumans() }}</span>
 					        			@if($discussion->post[0]->markdown)
 					        				<?php $discussion_body = GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $discussion->post[0]->body ); ?>
 					        			@else
@@ -136,13 +136,13 @@
         	<div class="row">
 	        	<div class="col-md-7">
 		        	<!-- TITLE -->
-	                <input type="text" class="form-control" id="title" name="title" placeholder="Title of {{ Config::get('chatter.titles.discussion') }}" v-model="title" value="{{ old('title') }}" >
+	                <input type="text" class="form-control" id="title" name="title" placeholder="{{ Config::get('chatter.titles.discussion') }}标题" v-model="title" value="{{ old('title') }}" >
 	            </div>
 
 	            <div class="col-md-4">
 		            <!-- CATEGORY -->
 			            <select id="chatter_category_id" class="form-control" name="chatter_category_id">
-			            	<option value="">Select a Category</option>
+			            	<option value="">请选择分类</option>
 				            @foreach($categories as $category)
 				            	@if(old('chatter_category_id') == $category->id)
 				            		<option value="{{ $category->id }}" selected>{{ $category->name }}</option>
@@ -161,21 +161,21 @@
             <!-- BODY -->
         	<div id="editor">
         		@if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
-					<label id="tinymce_placeholder">Type Your Discussion Here...</label>
+					<label id="tinymce_placeholder">请输入内容...</label>
     				<textarea id="body" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>
     			@elseif($chatter_editor == 'simplemde')
     				<textarea id="simplemde" name="body" placeholder="">{{ old('body') }}</textarea>
 				@elseif($chatter_editor == 'trumbowyg')
-					<textarea class="trumbowyg" name="body" placeholder="Type Your Discussion Here...">{{ old('body') }}</textarea>
+					<textarea class="trumbowyg" name="body" placeholder="请输入内容...">{{ old('body') }}</textarea>
 				@endif
     		</div>
 
             <input type="hidden" name="_token" id="csrf_token_field" value="{{ csrf_token() }}">
 
             <div id="new_discussion_footer">
-            	<input type='text' id="color" name="color" /><span class="select_color_text">Select a Color for this Discussion (optional)</span>
-            	<button id="submit_discussion" class="btn btn-success pull-right"><i class="chatter-new"></i> Create {{ Config::get('chatter.titles.discussion') }}</button>
-            	<a href="/{{ Config::get('chatter.routes.home') }}" class="btn btn-default pull-right" id="cancel_discussion">Cancel</a>
+            	<input type='text' id="color" name="color" /><span class="select_color_text">请选择讨论的颜色 (可选)</span>
+            	<button id="submit_discussion" class="btn btn-success pull-right"><i class="chatter-new"></i> 创建{{ Config::get('chatter.titles.discussion') }}</button>
+            	<a href="/{{ Config::get('chatter.routes.home') }}" class="btn btn-default pull-right" id="cancel_discussion">取消</a>
             	<div style="clear:both"></div>
             </div>
         </form>
