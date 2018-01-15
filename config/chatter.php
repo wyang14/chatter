@@ -33,7 +33,7 @@ return [
 
     'titles' => [
         'discussion'  => '讨论',
-        'discussions' => '讨论',
+        'discussions' => '讨论区',
         'category'    => '分类',
     ],
 
@@ -55,8 +55,8 @@ return [
     */
 
     'headline'      => '欢迎来到讨论区',
-    'description'   => 'A simple forum package for your Laravel app.',
-    'headline_logo' => '/vendor/wyang14/chatter/assets/images/logo-light.png',
+    'description'   => '为大数据说话，说大数据的话.',
+    //'headline_logo' => '/vendor/wyang14/chatter/assets/images/logo-light.png',
 
     /*
     |--------------------------------------------------------------------------
