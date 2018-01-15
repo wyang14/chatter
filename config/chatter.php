@@ -13,12 +13,12 @@ return [
     */
 
     'routes' => [
-        'home'       => '论坛',
-        'discussion' => '讨论',
-        'category'   => '分类',
-        'post'       => '帖子',
-        'register'   => '注册',
-        'login'      => '登录',
+        'home'       => 'forums',
+        'discussion' => 'discussion',
+        'category'   => 'category',
+        'post'       => 'posts',
+        'register'   => 'register',
+        'login'      => 'login',
     ],
 
     /*
