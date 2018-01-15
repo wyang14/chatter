@@ -21,7 +21,6 @@
 @section('content')
 
 <div id="chatter" class="discussion">
-
 	<div id="chatter_header" style="background-color:{{ $discussion->color }}">
 		<div class="container">
 			<a class="back_btn" href="/{{ Config::get('chatter.routes.home') }}"><i class="chatter-back"></i></a>
